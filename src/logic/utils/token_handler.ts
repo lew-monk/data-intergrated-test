@@ -31,8 +31,6 @@ export class JwtHandler extends TokenVerify {
       req.body!.user = decoded
       next()
     } catch (error: any) {
-      console.log(error.message)
-
       // Token verification failed
       throw new UnauthorizedException(
         "Please Log in again to access your account"

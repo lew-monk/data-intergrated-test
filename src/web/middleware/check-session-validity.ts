@@ -4,8 +4,6 @@ import jwt from "jsonwebtoken"
 export class checkSessionValidity {
   public constructor(private readonly _secretKey: string = "secret") {
     this._secretKey = _secretKey
-
-    console.log(this._secretKey)
   }
 
   public generateToken(payload: any, expiresIn: number): string {
@@ -31,7 +29,6 @@ export class checkSessionValidity {
       req.body!.user = decoded
       next()
     } catch (error) {
-      console.log(error)
       // Token verification failed
       throw Error("Something wrong with your session. Please Log in again")
     }
