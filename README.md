@@ -2,39 +2,27 @@
 
 ## Features
 
-* Github pipeline that runs tests
-* Git hooks (linting, running tests)
-* Dockerized application for development
-* Tests pre-configured
-* My opinionated Eslint and TypeScript rules
-* VSCode debugging
+- Git hooks (linting, running tests)
+- Dockerized application for development
+- My opinionated Eslint and TypeScript rules
 
-## Create new projects
+## Running the project
 
-Clone the repository, copy the script somewhere, modify the variables and set an alias in your shell.
+For docker users,
 
-```bash
-#!/bin/bash
+1. Clone the repo
+2. Add an env file at thr root of the project and add the following variables i.e. PORT, DB_URI, NODE_ENV, TOKEN_KEY
+3. Build the compose file through docker-compose up. The compose file contains the web server and the DB as well with sample env var for auth
 
-BASE_DIR=~/dev
-TEMPLATE_DIR=/ts-template
+###### NB The credentials should be changed as this is not in a ready state to go to production
 
-echo Directory?
-read dir
+For Native runners,
 
-echo Project Name?
-read name
+1. Clone the repo
+2. Add an env file at thr root of the project and add the following variables i.e. PORT, DB_URI, NODE_ENV, TOKEN_KEY
+3. Run yarn install or npm i to install all the packages
+4. Run yarn dev to start the app in development mode
 
-cp -R $BASE_DIR/$TEMPLATE_DIR $BASE_DIR/$dir/$name
-cd $BASE_DIR/$dir/$name && code . && git init && yarn
+Do to a busy and tight schedule, tests were not done as well as other domains i.e guardians and lectureres, but the work provided forms a building block for the rest of the domains
 
-echo successfully bootstrapped ts template in $BASE_DIR/$dir/$name
-```
-
-This will allow you to easily create new projects with the same template,
-like so:
-
-1. setup:ts (my alias)
-2. asks for directory: playground
-3. asks for folder name: example
-4. installs dependencies and starts vscode for you :)
+Well for any questions reach out to me the [monk](lewmonk@gmail.com)
