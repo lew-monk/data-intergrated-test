@@ -1,3 +1,5 @@
+import { ValidationException } from "../../exceptions/validation-exception"
+
 export class UpdateStudentDTO {
   private constructor(
     public readonly id: string,
@@ -7,7 +9,7 @@ export class UpdateStudentDTO {
 
   public static from(data: Partial<UpdateStudentDTO>): UpdateStudentDTO {
     if (!data.id) {
-      throw new Error("Id is required")
+      throw new ValidationException("Id is required")
     }
 
     return new UpdateStudentDTO(data.id, data.name, data.email)

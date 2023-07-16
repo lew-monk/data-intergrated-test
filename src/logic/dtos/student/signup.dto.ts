@@ -1,3 +1,5 @@
+import { ValidationException } from "../../exceptions/validation-exception"
+
 export class SignUpDTO {
   public constructor(
     public readonly name: string,
@@ -8,13 +10,13 @@ export class SignUpDTO {
 
   public static from(data: any): SignUpDTO {
     if (!data.name) {
-      throw new Error("Name is required")
+      throw new ValidationException("Name is required")
     }
     if (!data.email) {
-      throw new Error("Email is required")
+      throw new ValidationException("Email is required")
     }
     if (!data.password) {
-      throw new Error("Password is required")
+      throw new ValidationException("Password is required")
     }
 
     return new SignUpDTO(data.name, data.email, data.password)

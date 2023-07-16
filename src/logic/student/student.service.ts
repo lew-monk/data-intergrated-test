@@ -1,9 +1,10 @@
 import { injectable } from "inversify"
 import { StudentRepository } from "../../data/student/student.repository"
 import { IStudent } from "../../data/student/students.model"
-import { SignUpDTO } from "../dtos/student"
+import { GetStudentIDDTO, SignUpDTO } from "../dtos/student"
 import { StudentDataResponse } from "../dtos/student/student-data-response"
 import { UpdateStudentDTO } from "../dtos/student/update-student.tdo"
+import { NotFound } from "../exceptions/resource-not-found"
 import { PasswordHandler } from "../utils/password_handler"
 import { JwtHandler } from "../utils/token_handler"
 
@@ -26,6 +27,14 @@ export class StudentService {
     if (!student) return null
 
     return StudentDataResponse.from(student!)
+  }
+
+  public async deleteById(data: GetStudentIDDTO): Promise<string | null> {
+    const student = await this.studentRepo.findById(data.id)
+
+    if (!student) throw new NotFound("Student not found")
+
+    return await this.studentRepo.deleteById(data.id)
   }
 
   public async create(studentData: SignUpDTO): Promise<any> {

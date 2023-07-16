@@ -27,6 +27,15 @@ export class StudentRepository {
       .catch(() => null)
   }
 
+  public async deleteById(id: string): Promise<string | null> {
+    return await this._dbService.student
+      .deleteOne({ _id: id })
+      .then(() => {
+        return null
+      })
+      .catch((err: any) => err.message)
+  }
+
   public async updateOneById(data: any): Promise<null> {
     return await this._dbService.student
       .updateOne({ _id: data.id }, data)

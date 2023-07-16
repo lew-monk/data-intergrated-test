@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from "express"
 import jwt from "jsonwebtoken"
-import { UnauthorizedException } from "../exceptions/unauthorized"
-import { TokenVerify } from "../lib/base-token-validatiion"
 
-export class JwtHandler extends TokenVerify {
-  public constructor() {
-    super()
+export class checkSessionValidity {
+  public constructor(private readonly _secretKey: string = "secret") {
+    this._secretKey = _secretKey
+
+    console.log(this._secretKey)
   }
 
   public generateToken(payload: any, expiresIn: number): string {
@@ -21,7 +21,7 @@ export class JwtHandler extends TokenVerify {
   }
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  public verfifyToken(req: Request, res: Response, next: NextFunction) {
+  public verifyToken(req: Request, res: Response, next: NextFunction) {
     const token = req.headers.authorization?.split(" ")[1]
     if (!token) {
       throw Error("Please Login to continue")
@@ -30,13 +30,10 @@ export class JwtHandler extends TokenVerify {
       const decoded = jwt.verify(token, this._secretKey)
       req.body!.user = decoded
       next()
-    } catch (error: any) {
-      console.log(error.message)
-
+    } catch (error) {
+      console.log(error)
       // Token verification failed
-      throw new UnauthorizedException(
-        "Please Log in again to access your account"
-      )
+      throw Error("Something wrong with your session. Please Log in again")
     }
   }
 }
