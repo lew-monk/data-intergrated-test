@@ -16,12 +16,14 @@ For docker users,
 
 ###### NB The credentials should be changed as this is not in a ready state to go to production
 
-For Native runners,
+For Native runners, follow the steps below and ensure to have a working mongo database
 
 1. Clone the repo
 2. Add an env file at thr root of the project and add the following variables i.e. PORT, DB_URI, NODE_ENV, TOKEN_KEY
 3. Run yarn install or npm i to install all the packages
 4. Run yarn dev to start the app in development mode
+
+The DB_URI should be something in the lines of : mongodb://user:password@host:port
 
 ###### Tests
 
