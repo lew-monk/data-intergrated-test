@@ -44,9 +44,8 @@ export class StudentsController {
     ValidateRequest.withParams(UpdateStudentDTO)
   )
   private async updateStudent(req: Request, res: Response): Promise<void> {
-    const student = await this.studentsService.updateOneById(req.body)
-    const response = StudentDataResponse.from(student)
-    res.status(200).json(BaseHttpResponse.success({ student: response }, 200))
+    await this.studentsService.updateOneById(req.body)
+    res.status(204).json(BaseHttpResponse.success([], 204))
   }
   @httpDelete(
     "/:id",
@@ -58,7 +57,7 @@ export class StudentsController {
     await this.studentsService.deleteById(req.body).catch((e) => {
       res.status(400).json(BaseHttpResponse.failed(e.message, 400))
     })
-    res.status(200).json(BaseHttpResponse.success([], 200))
+    res.status(204).json(BaseHttpResponse.success([], 204))
   }
 
   @httpPost("/signup", ValidateRequest.with(SignUpDTO))

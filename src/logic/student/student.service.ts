@@ -57,7 +57,6 @@ export class StudentService {
     // check if user exists
     let student = await this.studentRepo.findById(studentData.id)
     if (!student) throw Error("Student Doesn't exists")
-
     //Hash password
 
     student = await this.studentRepo.updateOneById(studentData)
