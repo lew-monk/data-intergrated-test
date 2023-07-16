@@ -35,4 +35,4 @@ The delete endpoint for the students implements role based access as well as JWT
 
 The validation used same as above can be easily scaled without the need of much repetition with increase in business needs. This ensures with even increased complexity on a small subset of the code changes in the DTO section
 
-Well for any questions reach out to me the [monk](lewmonk@gmail.com)
+[Well for any questions reach out to me the at](lewmonk@gmail.com)
